@@ -1,0 +1,29 @@
+#################
+## IntelliJ
+#################
+.idea
+*.iml
+
+
+# Mac crap
+.DS_Store
+
+# Maven
+**/target/**
+
+# Gradle
+**/.gradle/**
+out
+build
+
+# Check in only .scss, not the compiled .css
+css
+
+# SASS
+.sass-cache
+
+# Browserify
+dist
+
+# npm
+npm-debug.log
