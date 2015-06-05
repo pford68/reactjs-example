@@ -7,9 +7,18 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
-    browserify = require('gulp-browserify'),
+    browserify = require('browserify'),
+    transform = require('vinyl-transform'),
     concat = require('gulp-concat'),
-    clean = require('gulp-clean'),
+    del = require('del'),
+    uglify = require('gulp-uglify'),
+    sass = require("gulp-sass"),
+    gulpif = require("gulp-if"),
+    merge = require("merge-stream"),
+    config = require('nconf'),
+    jasmine = require("gulp-jasmine"),          // Runs Jasmine from Gulp
+    karma = require("gulp-karma"),              // Runs Karma from Gulp
+    requireDir = require("require-dir"),        // Imports an entire directory
     livereload = require('gulp-livereload'),   // See Note 1 above
     server = require("./server");
 
@@ -23,37 +32,38 @@ gulp.task('lint', function() {
 
 // Browserify task
 gulp.task('browserify', function() {
-    // Single point of entry (make sure not to src ALL your files, browserify will figure it out for you)
-    gulp.src(['./src/js/main.js'])
-        .pipe(browserify({
-            insertGlobals: true,
-            debug: true
-        }))
-        // Bundle to a single file
-        .pipe(concat('bundle.js'))
-        // Output it to our dist folder
-        .pipe(gulp.dest('dist/js'));
+
+    var browserified = transform(function(filename) {
+        var b = browserify(filename, { debug: config.debug });
+        return b.bundle();
+    });
+
+    return gulp.src(['./src/js/main.js'])
+        .pipe(browserified)
+        .pipe(gulpif(config.debug === false, uglify()))
+        .pipe(rename('bundle.js'))
+        .pipe(gulp.dest('./build/js'));
 });
 
 // Views task
 gulp.task('views', function() {
     // Get our index.html
     gulp.src('./src/*.html')
-        // And put it in the dist folder
-        .pipe(gulp.dest('dist/'));
+        // And put it in the build folder
+        .pipe(gulp.dest('build/'));
 
     gulp.src('./src/images/**')
-        // Will be put in the dist/images folder
-        .pipe(gulp.dest('dist/images/'));
+        // Will be put in the build/images folder
+        .pipe(gulp.dest('build/images/'));
 
 
     gulp.src('./src/css/**')
-        // Will be put in the dist/css folder
-        .pipe(gulp.dest('dist/css/'));
+        // Will be put in the build/css folder
+        .pipe(gulp.dest('build/css/'));
 
     gulp.src('./src/config/**')
-        // Will be put in the dist/config folder
-        .pipe(gulp.dest('dist/config/'));
+        // Will be put in the build/config folder
+        .pipe(gulp.dest('build/config/'));
 });
 
 // Watching for changes to JS src files.
@@ -66,7 +76,7 @@ gulp.task('watch', ['lint', 'browserify'], function() {
     gulp.watch(['src/*.html', './src/*.css'], [
         'views'
     ]);
-    gulp.watch('dist/**').on('change', livereload.changed);
+    gulp.watch('build/**').on('change', livereload.changed);
 });
 
 // Dev task

@@ -6,7 +6,7 @@ var express = require("express"),
 
 app.use(methodOverride());
 app.use(bodyParser());
-app.use("/angular-example", express.static(__dirname + "/dist/"));
+app.use("/reactjs-example", express.static(__dirname + "/build/"));
 
 exports.start = function(port){
     app.listen(port);
