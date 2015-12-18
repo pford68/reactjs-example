@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     source = require('vinyl-source-stream'),
-    config = require("config");
+    config = require("config"),
+    project = require("../project.json");
 
 /*
  Browserify task.
@@ -28,6 +29,6 @@ gulp.task("browserify", function(){
     return b.bundle()
         .pipe(source('./src/js/main.js'))
         .pipe(gulpif(config.debug === false, streamify(uglify())))
-        .pipe(rename(config.build.js.name))
+        .pipe(rename(project.name))
         .pipe(gulp.dest('./build/js'));
 });
