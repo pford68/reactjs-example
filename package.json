@@ -9,11 +9,13 @@
     "method-override": "^2.3.5"
   },
   "devDependencies": {
+    "babel-preset-react": "^6.3.13",
     "browserify": "^12.0.1",
     "config": "^1.17.1",
     "csslint": "^0.10.0",
     "del": "^2.2.0",
     "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
     "gulp-cached": "^1.1.0",
     "gulp-csslint": "^0.2.0",
     "gulp-cssmin": "^0.1.7",
@@ -23,7 +25,6 @@
     "gulp-jshint": "^2.0.0",
     "gulp-karma": "0.0.5",
     "gulp-livereload": "^3.8.1",
-    "gulp-react": "^3.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^6.0.1",
     "gulp-sass": "^2.1.1",
