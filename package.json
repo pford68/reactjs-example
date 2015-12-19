@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "Gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5"
+  },
   "devDependencies": {
     "browserify": "^12.0.1",
     "config": "^1.17.1",

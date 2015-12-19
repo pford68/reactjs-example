@@ -31,6 +31,6 @@ gulp.task("browserify", function(){
     return b.bundle()
         .pipe(source('./src/js/main.js'))
         .pipe(gulpif(config.debug === false, streamify(uglify())))
-        .pipe(rename(project.name))
+        .pipe(rename(project.name + ".js"))
         .pipe(gulp.dest('./build/js'));
 });

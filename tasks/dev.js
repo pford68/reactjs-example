@@ -47,10 +47,10 @@ gulp.task('test', function(){
 /*
  Watching for changes to src files, and reloading the browser after any changes.
  */
-gulp.task('watch', ['lint', 'browserify'], function() {
+gulp.task('watch', ['jsx-lint', 'browserify'], function() {
     // Running lint and browserify on JS src changes and deploying the changes.
     gulp.watch(['./src/**/*.js', './src/**/*.json'],[
-        'lint',
+        'jsx-lint',
         'browserify'
     ]);
     // Deploying changes to HTML and CSS files

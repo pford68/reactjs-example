@@ -5,7 +5,8 @@ var express = require("express"),
     app = express();
 
 app.use(methodOverride());
-app.use(bodyParser());
+// parse application/json
+app.use(bodyParser.json());
 app.use("/reactjs-example", express.static(__dirname + "/build/"));
 
 exports.start = function(port){
