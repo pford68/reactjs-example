@@ -15,7 +15,7 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     livereload = require('gulp-livereload'),   // See Note 1 above
     cache = require('gulp-cached'),
-    react = require('gulp-react'),
+    babel = require('gulp-babel'),
     config = require("config"),
     gDestDir = './build';
 
@@ -50,12 +50,10 @@ gulp.task('lint', function() {
         .pipe(jshint.reporter('default'));
 });
 
-// Based on  https://gist.github.com/nicolashery/8e6baed6d3fd6bcde8d5
-// Does this fail in CI tools?
 gulp.task('jsx-lint', function() {
     return gulp.src('./src/**/*.js')
         .pipe(cache('jshint'))
-        .pipe(react())
+        .pipe(babel())
         .on('error', function(err) {
             console.error('JSX ERROR in ' + err.fileName);
             console.error(err.message);
