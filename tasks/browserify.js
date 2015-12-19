@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     source = require('vinyl-source-stream'),
+    reactify = require('reactify'),
     config = require("config"),
     project = require("../project.json");
 
@@ -23,7 +24,8 @@ gulp.task("browserify", function(){
     var b = browserify({
         entries: './main.js',
         basedir: './src/js',
-        debug: config.debug
+        debug: config.debug,
+        transform: reactify
     });
 
     return b.bundle()
