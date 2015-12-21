@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     karma = require('gulp-karma'),
     jasmine = require('gulp-jasmine'),
+    merge = require('merge-stream'),
     livereload = require('gulp-livereload'),   // See Note 1 above
     config = require("config");
 
@@ -49,17 +50,16 @@ gulp.task('test', function(){
  */
 gulp.task('watch', ['jsx-lint', 'browserify'], function() {
     // Running lint and browserify on JS src changes and deploying the changes.
-    gulp.watch(['./src/**/*.js', './src/**/*.json'],[
-        'jsx-lint',
-        'browserify'
-    ]);
+    gulp.watch('./src/**/*.js', ['jsx-lint', 'browserify']);
     // Deploying changes to HTML and CSS files
 
    // gulp.watch(['./src/**/*.html', './src/**/*.scss', '!src/lib/**'], [
         //'views',
    // ]);
     // Reloading the browser when changes are deployed.
-    gulp.watch('../build/**').on('change', livereload.changed);
+    if (config.livereload === true) {
+        gulp.watch('./build/**').on('change', livereload.changed);
+    }
 });
 
 

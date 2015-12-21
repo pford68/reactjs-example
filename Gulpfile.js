@@ -14,6 +14,7 @@ var gulp = require('gulp'),
     requireDir = require("require-dir"),        // Imports an entire directory
     config = require("config"),                 // Returns values from the config file(s) as a map.
     gulpif = require("gulp-if"),
+    inject = require("gulp-inject"),
     gDestDir = "./build",                       // The build directory
     tasks = requireDir("./tasks");              // Gulp tasks for specific and for specific deployments (e.g., development)
 

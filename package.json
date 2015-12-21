@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
+    "marked": "^0.3.5",
     "method-override": "^2.3.5"
   },
   "devDependencies": {
@@ -21,6 +22,7 @@
     "gulp-cssmin": "^0.1.7",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^2.4.0",
+    "gulp-inject": "^3.0.0",
     "gulp-jasmine": "^2.2.1",
     "gulp-jshint": "^2.0.0",
     "gulp-karma": "0.0.5",
@@ -32,6 +34,7 @@
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.7",
     "gulp-zip": "^3.0.2",
+    "jquery": "^2.1.4",
     "jshint": "^2.9.1-rc1",
     "karma": "^0.13.15",
     "karma-browserify": "^4.4.2",

@@ -25,7 +25,7 @@ gulp.task("browserify", function(){
         entries: './main.js',
         basedir: './src/js',
         debug: config.debug,
-        transform: reactify
+        transform: [ reactify ]
     });
 
     return b.bundle()
