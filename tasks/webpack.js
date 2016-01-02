@@ -10,8 +10,9 @@ var webpackConfig = require("./webpack.config");
 
 gulp.task("build:js", function(callback) {
     var myConfig = Object.create(webpackConfig);
+    myConfig.plugins = myConfig.plugins || []; // Preventing NPE at line 17.
 
-    if (config.production === true) {
+    if (process.env.NODE_ENV === 'production') {
         // modify some webpack config options
         myConfig.plugins = myConfig.plugins.concat(
             new webpack.DefinePlugin({
@@ -49,6 +50,8 @@ gulp.task("webpack:dev", function(callback) {
     var myConfig = Object.create(webpackConfig);
     myConfig.devtool = "eval";
     myConfig.debug = true;
+    // The dev-server requires an absolute path to the location of the JavaScript bundle.
+    myConfig.output.path = __dirname + "/build/js";
 
     // Start a webpack-dev-server
     new WebpackDevServer(webpack(myConfig), {

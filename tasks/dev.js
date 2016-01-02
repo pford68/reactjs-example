@@ -6,7 +6,6 @@
  *   (1) The livereload module works best with Chrome's Livereload extension:
  *       See https://www.npmjs.org/package/gulp-livereload
  */
-
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     karma = require('gulp-karma'),
@@ -16,7 +15,8 @@ var gulp = require('gulp'),
     config = require("config");
 
 require("./common");
-require("./../not-used/browserify");
+//require("./browserify");
+require("./webpack");
 
 
 
@@ -24,33 +24,26 @@ require("./../not-used/browserify");
  Running both server-side and client-side tests
  */
 gulp.task('test', function(){
-    var tasks = [];
-    // Server-side tests
-    tasks.push(gulp.src('./test/spec/services/**/*.js')
-            .pipe(jasmine({ verbose: true }))
-    );
-
     // Client-side tests using Jasmine through Karma,
     // which is able to handle references to browser objects like "window" and "document."
-    tasks.push(gulp.src(['./test/spec/**/*.js', '!./test/spec/services/**'])
+    return gulp.src(['./test/spec/**/*.js', '!./test/spec/services/**'])
             .pipe(karma({
                 configFile: 'karma.conf.js',
                 action: 'run'
             })).on('error', function(err) {
                 // Make sure failed tests cause gulp to exit non-zero....
                 throw err;
-            })
-    );
-
-    return merge(tasks);
+            });
 });
+
+
 
 /*
  Watching for changes to src files, and reloading the browser after any changes.
  */
-gulp.task('watch', ['jsx-lint', 'browserify'], function() {
+gulp.task('watch', ['jsx-lint', 'build:js'], function() {
     // Running lint and browserify on JS src changes and deploying the changes.
-    gulp.watch('./src/**/*.js', ['jsx-lint', 'browserify']);
+    gulp.watch('./src/**/*.js', ['jsx-lint', 'build:js']);
     // Deploying changes to HTML and CSS files
 
    // gulp.watch(['./src/**/*.html', './src/**/*.scss', '!src/lib/**'], [

@@ -14,9 +14,9 @@ module.exports = {
         takes the "/" to be the server's document root.  However, the webpack build process will throw
         an "access denied" error (at least on the Mac), apparently taking the "/" to be the file system root.
 
-        The value below works for both the build task and the dev-server task.
+        The value below works for both the build task, but not the dev-server task.
          */
-        path: __dirname + '/build/js',
+        path: './build/js',
         publicPath: "/js",
         filename: "reactjs-example.js"
     },
