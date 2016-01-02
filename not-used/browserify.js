@@ -19,7 +19,7 @@ var gulp = require('gulp'),
 
  Fetches dependencies, and compresses the resulting JS bundle if not in debug mode.
  */
-gulp.task("browserify", function(){
+gulp.task("build:js", function(){
 
     var b = browserify({
         entries: './main.js',

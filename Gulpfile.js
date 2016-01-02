@@ -37,7 +37,7 @@ gulp.task('clean', function(done) {
 /*
  Builds the entire project.
  */
-gulp.task("build", ['fonts', 'images', 'jsx-lint', 'css-lint', 'browserify', 'views'], function(){
+gulp.task("build", ['fonts', 'images', 'jsx-lint', 'css-lint', 'build:js', 'views'], function(){
     return gulp.src([
             './src/*.html'
         ], { base: './src' })

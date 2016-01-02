@@ -16,7 +16,7 @@ var gulp = require('gulp'),
     config = require("config");
 
 require("./common");
-require("./browserify");
+require("./../not-used/browserify");
 
 
 
