@@ -10,6 +10,7 @@
     "method-override": "^2.3.5"
   },
   "devDependencies": {
+    "babel-loader": "^6.2.0",
     "babel-preset-react": "^6.3.13",
     "browserify": "^12.0.1",
     "config": "^1.17.1",

@@ -3,7 +3,7 @@
  */
 
 var React = require('react'),
-    Comment = require('./comment');
+    Comment = require('./Comment');
 
 module.exports = React.createClass({
     render: function() {
