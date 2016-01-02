@@ -49,10 +49,6 @@ gulp.task("webpack:dev", function(callback) {
     var myConfig = Object.create(webpackConfig);
     myConfig.devtool = "eval";
     myConfig.debug = true;
-    // The "path" should be absolute from the application root.  The dev server will choke on a relative path here.
-    // See http://stackoverflow.com/questions/34371029/cannot-start-webpack-dev-server-with-gulp
-    //myConfig.output.path =  "/build/js";
-
 
     // Start a webpack-dev-server
     new WebpackDevServer(webpack(myConfig), {
