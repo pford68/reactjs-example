@@ -1,11 +1,14 @@
 // Karma configuration
 // Generated on Wed Apr 09 2014 07:37:53 GMT-0400 (Eastern Daylight Time)
+var webpackConfig = require('./webpack.config.js');
+webpackConfig.devtool = "inline-source-map";
+webpackConfig.entry = {};
 
 module.exports = function (config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '.',
+        basePath: __dirname,
 
 
         // frameworks to use
@@ -14,19 +17,20 @@ module.exports = function (config) {
 
 
         // list of files / patterns to load in the browser
-        files: [
-            'test/**/*Spec.js'
+        files: [,
+            //'test/shims/*.js',  // The shim is not working when loaded this way.
+            //'node_modules/react-addons-test-utils/*.js', // Putting this here didn't help.
+            'test/spec/**'
         ],
 
 
         // list of preprocessors
         preprocessors: {
-            'test/*': ['webpack']
+            'test/**/*.js': ['webpack', 'sourcemap']  // Without 'webpack' here, you get "Can't find variable require" errors.
         },
 
 
-        webpack: {
-        },
+        webpack: webpackConfig,
 
 
         webpackMiddleware: {
@@ -57,6 +61,7 @@ module.exports = function (config) {
 
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: true,
+
 
 
         // start these browsers
