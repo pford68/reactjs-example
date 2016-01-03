@@ -8,6 +8,10 @@ var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config");
 
+
+/**
+ * Builds the JavaScript bundle
+ */
 gulp.task("build:js", function(callback) {
     var myConfig = Object.create(webpackConfig);
     myConfig.plugins = myConfig.plugins || []; // Preventing NPE at line 17.
@@ -45,6 +49,9 @@ gulp.task("build:js", function(callback) {
 });
 
 
+/**
+ * Starts a simple Node dev server, only meant to serve the client.
+ */
 gulp.task("webpack:dev", function(callback) {
     // modify some webpack config options
     var myConfig = Object.create(webpackConfig);
